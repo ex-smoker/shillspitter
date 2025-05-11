@@ -12,29 +12,33 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-4",
         messages: [
           {
             role: "user",
-            content: prompt
-          }
+            content: prompt,
+          },
         ],
         temperature: 1,
-        max_tokens: 80
-      })
+        max_tokens: 80,
+      }),
     });
 
     const data = await response.json();
 
-    const tweet = data.choices?.[0]?.message?.content?.trim() || "Try again";
+    const tweet = data?.choices?.[0]?.message?.content?.trim();
+
+    if (!tweet) {
+      console.error("No tweet found in OpenAI response:", data);
+      return res.status(500).json({ hook: "Try again" });
+    }
 
     res.status(200).json({ hook: tweet });
-
   } catch (error) {
-    console.error("API Error:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("API request failed:", error);
+    res.status(500).json({ hook: "Try again" });
   }
 }
