@@ -1,21 +1,45 @@
-const hooks = [
-    "Your bags aren’t heavy, your tweet is.",
-    "CT doesn’t sleep. Neither should your hooks.",
-    "You’re not shadowbanned. You’re just boring.",
-    "Every meme starts with a scroll-stopper.",
-    "GM is fine. GM + alpha is better."
-];
+const hookEl = document.getElementById('hook');
+const copiedEl = document.getElementById('copied');
+
+const hooks = {
+  default: [
+    "You're early. But not that early. Tweet it.",
+    "Crypto is a scam — until it isn't."
+  ],
+  viral: [
+    "Most CT engagement comes from 3 types of tweets. This is one of them.",
+    "This tweet got 12k likes. The content? Mid."
+  ],
+  shitpost: [
+    "Imagine buying the top and telling your mum it's research.",
+    "If you're not losing money for content, are you even CT?"
+  ],
+  alpha: [
+    "Volume leads price. Look at SOL."
+  ],
+  callout: [
+    "Nobody actually uses your chain. Cope."
+  ],
+  gm: [
+    "GM CT. Alt season or trap?",
+    "Good morning. Bags still heavy?"
+  ]
+};
 
 function generateHook() {
-    const output = document.getElementById('output');
-    const hook = hooks[Math.floor(Math.random() * hooks.length)];
-    output.innerText = hook;
+  const style = document.getElementById('style').value;
+  const options = hooks[style] || hooks['default'];
+  const newHook = options[Math.floor(Math.random() * options.length)];
+  hookEl.textContent = newHook;
+  copiedEl.textContent = '';
 }
 
 function copyHook() {
-    const text = document.getElementById('output').innerText;
-    if (!text) return;
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Copied to clipboard!');
+  navigator.clipboard.writeText(hookEl.textContent)
+    .then(() => {
+      copiedEl.textContent = '✅ Copied to clipboard!';
+    })
+    .catch(() => {
+      copiedEl.textContent = '❌ Copy failed';
     });
 }

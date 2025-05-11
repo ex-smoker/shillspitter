@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShillSpitter</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Generate viral crypto tweet hooks instantly. ShillSpitter is your on-demand CT engagement engine." />
+  <meta property="og:title" content="ShillSpitter – Viral Crypto Tweet Hooks" />
+  <meta property="og:description" content="Generate viral tweets in 1 click. Built for CT degen engagement." />
+  <title>ShillSpitter</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>ShillSpitter</h1>
-        <p>Generate CT-ready tweet hooks instantly.</p>
-        <button onclick="generateHook()">Generate Hook</button>
-        <div id="output"></div>
-        <button onclick="copyHook()">Copy</button>
-    </div>
-    <script src="script.js"></script>
+  <div class="container">
+    <h1>ShillSpitter</h1>
+    <p>Generate CT-ready tweet hooks instantly.</p>
+
+    <label for="style">Choose a vibe:</label>
+    <select id="style">
+      <option value="default">Anything 🔀</option>
+      <option value="viral">Viral 🧠</option>
+      <option value="shitpost">Shitpost 😂</option>
+      <option value="alpha">Alpha 🚀</option>
+      <option value="callout">Callout ⚔️</option>
+      <option value="gm">GM ☀️</option>
+    </select>
+
+    <br />
+    <button class="button" onclick="generateHook()">Generate Hook</button>
+    <div class="hook" id="hook">GM is fine. GM + alpha is better.</div>
+    <button class="button" onclick="copyHook()">Copy</button>
+    <div class="copied" id="copied"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
